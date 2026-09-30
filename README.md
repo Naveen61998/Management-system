@@ -1,100 +1,45 @@
-# Library Management System — One Command Project
+# Library Management System
 
-A complete beginner-friendly Java full-stack Library Management System using:
-
-- HTML
-- CSS
-- JavaScript
-- Java 17
-- Maven
-- JDBC
-- MySQL
-- DAO architecture
+Complete beginner-friendly Java web application using Java 17, JDBC, MySQL, HTML, CSS and JavaScript.
 
 ## Features
-
 - Dashboard
-- Add/search/delete books
-- Add/search/delete members
+- Book CRUD basics: add, search, delete
+- Member CRUD basics: add, search, delete
 - Issue books
 - Return books
-- Automatic late fine calculation: ₹5 per late day
-- MySQL database
-- JDBC transactions
-- Responsive browser UI
+- Automatic available-book count
+- Fine calculation: ₹5 per late day
+- JDBC PreparedStatement
+- JDBC ResultSet
+- JDBC transactions with commit/rollback
+- DAO architecture
+- Responsive frontend
 
 ## Requirements
+- JDK 17+
+- Maven 3.9+
+- MySQL 8+
 
-Install these once:
+## Setup
+1. Open MySQL Workbench.
+2. Run `database/library.sql`.
+3. If your MySQL password is not `root`, set `LIBRARY_DB_PASSWORD` or edit `Database.java`.
+4. In the project folder run:
+   `mvn clean compile`
+5. Start:
+   `mvn exec:java -Dexec.mainClass=com.library.Main`
+6. Open `http://localhost:8080`
 
-1. JDK 17+
-2. Maven 3.9+
-3. MySQL 8+
+## JDBC learning points
+Connection, DriverManager, PreparedStatement, ResultSet, executeQuery, executeUpdate, transactions, commit, rollback and try-with-resources.
 
-## Database setup
+## Project structure
+- `model` = Java data objects
+- `dao` = JDBC/database operations
+- `config` = database connection
+- `server` = HTTP API
+- `static` = frontend
+- `database` = MySQL schema
 
-Start MySQL and run:
-
-`database/library.sql`
-
-Default database settings:
-
-- Database: `library_db`
-- Username: `root`
-- Password: `root`
-
-If your password is different, set:
-
-Windows CMD:
-`set LIBRARY_DB_PASSWORD=your_password`
-
-PowerShell:
-`$env:LIBRARY_DB_PASSWORD="your_password"`
-
-Linux/macOS:
-`export LIBRARY_DB_PASSWORD=your_password`
-
-You can also set `LIBRARY_DB_USER` and `LIBRARY_DB_URL`.
-
-## Run with one command
-
-Windows:
-
-`run.bat`
-
-Linux/macOS:
-
-`chmod +x run.sh && ./run.sh`
-
-The Java server starts at:
-
-`http://localhost:8080`
-
-The application attempts to open the browser automatically.
-
-## Important
-
-Opening `index.html` directly is not the normal way to run this project. The Java server must be running because the HTML/JavaScript calls the JDBC-backed Java API.
-
-## JDBC learning flow
-
-Browser
-→ JavaScript fetch()
-→ Java HTTP server
-→ DAO
-→ JDBC
-→ MySQL
-
-Important JDBC classes used:
-
-- DriverManager
-- Connection
-- PreparedStatement
-- ResultSet
-- SQLException
-
-Transactions are used for issue/return operations with commit and rollback.
-
-## GitHub
-
-Upload the whole project folder to GitHub. Do not upload passwords or production database credentials.
+This is an educational project. A production system should add authentication, authorization, stronger validation, connection pooling, CSRF protection and structured JSON handling.
