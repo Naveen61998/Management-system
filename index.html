@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>📚 Library Management System</h1>
+    <p>Java + JDBC + MySQL</p>
+  </div>
+  <span class="status">● System Online</span>
+</header>
+
+<nav>
+  <button onclick="show('dashboard')">Dashboard</button>
+  <button onclick="show('books')">Books</button>
+  <button onclick="show('members')">Members</button>
+  <button onclick="show('issues')">Issue / Return</button>
+</nav>
+
+<main>
+<section id="dashboard" class="page">
+  <h2>Dashboard</h2>
+  <div class="cards">
+    <div class="card"><span>📚</span><h3>Books</h3><strong id="bookCount">0</strong></div>
+    <div class="card"><span>👥</span><h3>Members</h3><strong id="memberCount">0</strong></div>
+    <div class="card"><span>📖</span><h3>Currently Issued</h3><strong id="issuedCount">0</strong></div>
+  </div>
+  <div class="info">
+    <h3>How this application works</h3>
+    <p>HTML/CSS/JavaScript → Java HTTP Server → DAO → JDBC → MySQL</p>
+  </div>
+</section>
+
+<section id="books" class="page hidden">
+  <h2>Book Management</h2>
+  <form id="bookForm" class="form-grid">
+    <input name="title" placeholder="Book title" required>
+    <input name="author" placeholder="Author" required>
+    <input name="category" placeholder="Category">
+    <input name="isbn" placeholder="ISBN">
+    <input name="quantity" type="number" min="1" value="1" required>
+    <button type="submit">Add Book</button>
+  </form>
+  <input id="bookSearch" class="search" placeholder="Search books..." oninput="loadBooks()">
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Title</th><th>Author</th><th>Category</th><th>ISBN</th><th>Qty</th><th>Available</th><th>Action</th></tr></thead>
+    <tbody id="bookRows"></tbody>
+  </table></div>
+</section>
+
+<section id="members" class="page hidden">
+  <h2>Member Management</h2>
+  <form id="memberForm" class="form-grid">
+    <input name="name" placeholder="Member name" required>
+    <input name="email" type="email" placeholder="Email">
+    <input name="phone" placeholder="Phone">
+    <input name="address" placeholder="Address">
+    <button type="submit">Add Member</button>
+  </form>
+  <input id="memberSearch" class="search" placeholder="Search members..." oninput="loadMembers()">
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
+    <tbody id="memberRows"></tbody>
+  </table></div>
+</section>
+
+<section id="issues" class="page hidden">
+  <h2>Issue / Return Books</h2>
+  <form id="issueForm" class="form-grid">
+    <input name="bookId" type="number" min="1" placeholder="Book ID" required>
+    <input name="memberId" type="number" min="1" placeholder="Member ID" required>
+    <input name="dueDate" type="date" required>
+    <button type="submit">Issue Book</button>
+  </form>
+  <p class="hint">Fine rule: ₹5 per late day.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Book</th><th>Member</th><th>Issue Date</th><th>Due Date</th><th>Return Date</th><th>Fine</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody id="issueRows"></tbody>
+  </table></div>
+</section>
+</main>
+
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
